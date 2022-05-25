@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "message/";
+
+message TestMessage
+{
+    string key = 1;
+    string value = 2;
+    bool success = 3;
+    uint32 id = 4;
+    bool validate = 5;
+}
