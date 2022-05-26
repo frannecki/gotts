@@ -38,7 +38,6 @@ func (server *TcpServer) handleTcpConnection(conn net.Conn) {
 			server.callback(channel, &channel.ReadBuffer)
 		}
 	}
-	log.Printf("Connection from %s has disconnected\n", name)
 	server.channelExiting <- channel
 }
 
@@ -48,6 +47,7 @@ func (server *TcpServer) monitorTcpConnections() {
 		case channel := <-server.channelEntering:
 			server.connections[channel.Name] = channel
 		case channel := <-server.channelExiting:
+			log.Println("Connection disconnected:", channel.Name)
 			delete(server.connections, channel.Name)
 		}
 	}

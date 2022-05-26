@@ -1,5 +1,2 @@
-/proto
-/gotts
 *.pb.go
-*.proto
 main*.go
