@@ -8,12 +8,12 @@ func compareProtoTestMessage(msg1 *TestMessage, msg2 *TestMessage) bool {
 	return msg1.Key == msg2.Key && msg1.Value == msg2.Value && msg1.Id == msg2.Id
 }
 
-func TestMarshalUnmarshal(t *testing.T) {
+func TestCodec(t *testing.T) {
 	msg := TestMessage{Key: "re", Value: "ply", Id: 4}
 	codec := NewProtobufCodec()
 	codec.registerProtoMessage(msg.ProtoReflect().Type())
-	marshaled := marshalProtoMessage(&msg)
-	msg1, err := codec.unmarshalProtoMessage(marshaled)
+	marshaled := encode(&msg)
+	msg1, err := codec.decode(marshaled)
 	if err != nil {
 		t.Error(err)
 	}
