@@ -48,6 +48,10 @@ func (client *TcpClient) Run() {
 	}
 }
 
+func (client *TcpClient) Disconnect() {
+	client.Channel.Conn.Close()
+}
+
 func NewTcpClient() *TcpClient {
 	return &TcpClient{}
 }
